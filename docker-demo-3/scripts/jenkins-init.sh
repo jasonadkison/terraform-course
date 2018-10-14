@@ -4,7 +4,7 @@
 vgchange -ay
 
 DEVICE_FS=`blkid -o value -s TYPE ${DEVICE}`
-if [ "`echo -n $DEVICE_FS`" == "" ] ; then 
+if [ "`echo -n $DEVICE_FS`" == "" ] ; then
   # wait for the device to be attached
   DEVICENAME=`echo "${DEVICE}" | awk -F '/' '{print $3}'`
   DEVICEEXISTS=''
@@ -28,7 +28,7 @@ mount /var/lib/jenkins
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 echo "deb http://pkg.jenkins.io/debian-stable binary/" >> /etc/apt/sources.list
 apt-get update
-apt-get install -y jenkins=${JENKINS_VERSION} unzip docker.io
+apt-get install -y openjdk-8-jre jenkins=${JENKINS_VERSION} unzip docker.io
 
 # enable docker and add perms
 usermod -G docker jenkins
@@ -46,9 +46,9 @@ pip install awscli
 
 # install terraform
 TERRAFORM_VERSION="0.11.7"
-wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-&& unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin \
-&& rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+wget -q https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip \
+&& unzip -o terraform_0.11.7_linux_amd64.zip -d /usr/local/bin \
+&& rm terraform_0.11.7_linux_amd64.zip
 
 # clean up
 apt-get clean

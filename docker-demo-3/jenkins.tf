@@ -14,12 +14,16 @@ resource "aws_instance" "jenkins-instance" {
   # user data
   user_data = "${data.template_cloudinit_config.cloudinit-jenkins.rendered}"
 
+  tags {
+    Name = "Jenkins"
+  }
+
 }
 
 resource "aws_ebs_volume" "jenkins-data" {
     availability_zone = "eu-west-1a"
     size = 20
-    type = "gp2" 
+    type = "gp2"
     tags {
         Name = "jenkins-data"
     }
